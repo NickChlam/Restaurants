@@ -12,6 +12,6 @@
   "dependencies": {
     "csv-parser": "^2.3.2",
     "express": "^4.17.1",
-    "mongoose": "^5.0.1"
+    "mongoose": "^5.7.5"
   }
 }
