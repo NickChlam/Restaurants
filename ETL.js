@@ -31,7 +31,7 @@ mongoose.connect('mongodb://localhost/Cities')
 
     async function createRestarant(rest) {
         const result = await rest.save(); 
-        print(result)
+        console.log(result)
     }
 
     // createCourse();
