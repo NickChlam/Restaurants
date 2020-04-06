@@ -2,6 +2,7 @@
 const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
+const cors = require('cors')
 
 // import routes 
 const glennCoveRest = require('./routes/glenCoveRoute')
@@ -15,9 +16,12 @@ mongoose.connect(conn, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log('connected to mongoDB'))
     .catch(err => console.log(err))
 
+// middleware
+app.use(cors())
 
 // inject express 
 glennCoveRest(app)
+
 
 // config
 const port = process.env.PORT || 3001
