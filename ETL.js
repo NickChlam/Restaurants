@@ -7,8 +7,10 @@ mongoose.connect('mongodb://localhost/Cities')
     .catch( err => console.error('Could not connect to mongo.. ', err))
 
     const GlenCoveSchema = new mongoose.Schema({
+            
             BusinessName: String,
             Category: String,
+            Labels: String,
             OpenClosed: String,
             Town: String,
             Address: String,
@@ -24,26 +26,30 @@ mongoose.connect('mongodb://localhost/Cities')
             Email: String,
             Facebook: String,
             Instagram: String,
-            Twitter: String
+            Twitter: String,
+           
     })
 
     const GlenCove = mongoose.model('GlenCove', GlenCoveSchema)
 
     async function createRestarant(rest) {
         const result = await rest.save(); 
-        console.log(result)
+        
     }
 
     // createCourse();
 
-    fs.createReadStream('GlenCove.csv')
+    fs.createReadStream('GlenCoveFood.csv')
         .pipe(csv())
         .on('data', (row) => {
+            
             let GlenCoveData = new GlenCove(row)
+            console.log(row)
             createRestarant(GlenCoveData)
         })
         .on('end', () => {
             console.log('CSV file successfully processed');
-        });
+        })
+       
 
     

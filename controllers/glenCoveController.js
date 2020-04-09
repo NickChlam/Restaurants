@@ -19,6 +19,7 @@ exports.getRestaurants = async function(req, res) {
         .select('-_id -__v')
         .limit(pageSize)
         .skip((pageNumber - 1)  * pageSize)
+        .sort({BusinessName: 1 })
         .lean()
     
     if(!restaurants.length) return res.status(204).send({"error": true, "message": 'no data '})
@@ -37,6 +38,7 @@ exports.getOpenRestaurants = async function(req, res) {
         .select('-_id -__v')
         .limit(pageSize)
         .skip((pageNumber -1) * pageSize)
+        .sort({BusinessName: 1 })
         .lean()
 
     
@@ -58,6 +60,7 @@ exports.getBusiness = async function(req, res) {
         .select('-_id -__v')
         .limit(pageSize)
         .skip((pageNumber -1) * pageSize)
+        .sort({BusinessName: 1 })
         .lean()
 
     
@@ -85,6 +88,7 @@ exports.getRestaurantsByType = async function(req, res) {
         .select('-_id -__v')
         .limit(pageSize)
         .skip((pageNumber -1) * pageSize)
+        .sort({BusinessName: 1 })
         .lean()
         
         //restaurants.unshift({"count": restaurants.length})
