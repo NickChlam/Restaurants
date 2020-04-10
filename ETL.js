@@ -9,6 +9,7 @@ mongoose.connect('mongodb://localhost/Cities')
     const GlenCoveSchema = new mongoose.Schema({
             
             BusinessName: String,
+            imageUrl: String,
             Category: String,
             Labels: String,
             OpenClosed: String,
@@ -39,7 +40,7 @@ mongoose.connect('mongodb://localhost/Cities')
 
     // createCourse();
 
-    fs.createReadStream('FoodProd.csv')
+    fs.createReadStream('imgFood.csv')
         .pipe(csv())
         .on('data', (row) => {
             
