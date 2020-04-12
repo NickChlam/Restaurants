@@ -40,7 +40,7 @@ mongoose.connect('mongodb://localhost/Cities')
 
     // createCourse();
 
-    fs.createReadStream('imgFood.csv')
+    fs.createReadStream('Food.csv')
         .pipe(csv())
         .on('data', (row) => {
             
