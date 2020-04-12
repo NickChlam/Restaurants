@@ -50,7 +50,8 @@ exports.getOpenRestaurants = async function(req, res) {
 
 exports.getBusiness = async function(req, res) {
     name = req.params.name
-   
+    console.log(name)
+    if (name == '') { res.status.status(201)}
     pageNumber = parseInt(req.query.page)
     pageSize = parseInt(req.query.size)
 
@@ -94,4 +95,8 @@ exports.getRestaurantsByType = async function(req, res) {
         //restaurants.unshift({"count": restaurants.length})
         if(!restaurants.length) return res.status(204).send({"error": true, "message": 'no data '})
         return res.status(200).send(restaurants)
+}
+
+exports.notFound = async function(req, res) {
+        return res.status(204).send({"error": true, "message": 'not found'})
 }

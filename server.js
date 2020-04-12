@@ -14,7 +14,12 @@ let conn = 'mongodb://localhost:27017/Cities';
 // TODO : replace connection string with envirnment vars 
 mongoose.connect(conn, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log('connected to mongoDB'))
-    .catch(err => console.log(err))
+    .catch(err => {
+        console.log({'error': 'something went wrong with Mongo Connection'})
+        console.log(err)
+        process.exit()
+     
+    })
 
 // middleware
 app.use(cors())
@@ -29,4 +34,4 @@ const port = process.env.PORT || 3001
 // listen! 
 app.listen( port, () => {
     console.log(`started listening on port ${port}`)
-})
+});

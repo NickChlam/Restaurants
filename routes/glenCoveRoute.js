@@ -11,6 +11,9 @@ module.exports = function(app) {
     app.route('/restaurants/type/:type')
         .get(Rest.getRestaurantsByType)
 
+    app.route('/restaurants/name')
+        .get(Rest.notFound)
+
     app.route('/restaurants/open')
         .get(Rest.getOpenRestaurants)
         
