@@ -15,7 +15,7 @@ exports.getRestaurants = async function(req, res) {
         return res.status(400).send({"error": "query param's must be numbers"})
     }
 
-    const restaurants = await glenCove.find()
+    const restaurants = await glenCove.find({OpenClosed: 'Open'})
         .select('-_id -__v')
         .limit(pageSize)
         .skip((pageNumber - 1)  * pageSize)
@@ -32,9 +32,10 @@ exports.getOpenRestaurants = async function(req, res) {
     pageNumber = parseInt(req.query.page)
     pageSize = parseInt(req.query.size)
 
-    const restaurants = await glenCove.find({
-        BusinessName: { "$regex": name, "$options": "i" }
-        })
+    const restaurants = await glenCove.find(
+            { BusinessName: { "$regex": name, "$options": "i" }},
+            {OpenClosed: 'Open'}
+        )
         .select('-_id -__v')
         .limit(pageSize)
         .skip((pageNumber -1) * pageSize)
@@ -50,14 +51,16 @@ exports.getOpenRestaurants = async function(req, res) {
 
 exports.getBusiness = async function(req, res) {
     name = req.params.name
-    console.log(name)
+    
     if (name == '') { res.status.status(201)}
     pageNumber = parseInt(req.query.page)
     pageSize = parseInt(req.query.size)
 
     const restaurants = await glenCove.find({
-        BusinessName: { "$regex": name, "$options": "i" }
-        })
+        BusinessName: { "$regex": name, "$options": "i" },
+        OpenClosed : "Open"
+    }
+        )
         .select('-_id -__v')
         .limit(pageSize)
         .skip((pageNumber -1) * pageSize)
@@ -84,7 +87,8 @@ exports.getRestaurantsByType = async function(req, res) {
     //     .lean()
 
     const restaurants = await glenCove.find({
-        Category: { "$regex": type, "$options": "i" }
+        Category: { "$regex": type, "$options": "i" },
+        OpenClosed : "Open"
         })
         .select('-_id -__v')
         .limit(pageSize)
